@@ -1,0 +1,44 @@
+{
+  "author": "Pedro Henrique Bergamo",
+  "dependencies": {
+    "@fastify/cookie": "8.3.0",
+    "@fastify/jwt": "7.2.0",
+    "@prisma/client": "4.16.2",
+    "bcryptjs": "2.4.3",
+    "fastify": "4.19.2",
+    "zod": "3.21.4"
+  },
+  "description": "Animal adoption project.",
+  "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
+    "@types/node": "20.4.0",
+    "@typescript-eslint/eslint-plugin": "5.61.0",
+    "@typescript-eslint/parser": "5.61.0",
+    "dotenv": "16.3.1",
+    "eslint": "8.44.0",
+    "prisma": "4.16.2",
+    "tsup": "7.1.0",
+    "tsx": "3.12.7",
+    "typescript": "5.1.6"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "find-a-friend",
+  "scripts": {
+    "build": "tsup src --out-dir build",
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint src --ext .ts --fix",
+    "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
+    "start": "node build/server.js",
+    "test": "vitest run --dir src/use-cases",
+    "test:coverage": "vitest run --coverage",
+    "test:create-prisma-environment": "npm link ./prisma/vitest-environment-prisma",
+    "test:e2e": "vitest run --dir src/http",
+    "test:e2e:watch": "vitest --dir src/http",
+    "test:install-prisma-environment": "npm link vitest-environment-prisma",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest --dir src/use-cases"
+  },
+  "version": "1.0.0"
+}
