@@ -21,6 +21,8 @@ export async function signUp(request: FastifyRequest, reply: FastifyReply) {
     const signUpUseCase = makeSignUpUseCase();
 
     await signUpUseCase.execute({ name, email, address, cep, phone, password });
+
+    return reply.status(201).send();
   } catch (error) {
     if (error instanceof OrgAlreadyExistsError) {
       return reply.status(409).send({
@@ -30,6 +32,4 @@ export async function signUp(request: FastifyRequest, reply: FastifyReply) {
 
     throw error;
   }
-
-  return reply.status(201).send();
 }

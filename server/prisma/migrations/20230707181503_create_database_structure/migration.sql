@@ -4,8 +4,8 @@ CREATE TABLE "orgs" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "address" TEXT NOT NULL,
-    "cep" INTEGER NOT NULL,
-    "phone" INTEGER NOT NULL,
+    "cep" BIGINT NOT NULL,
+    "phone" BIGINT NOT NULL,
     "password_hash" TEXT NOT NULL,
 
     CONSTRAINT "orgs_pkey" PRIMARY KEY ("id")
