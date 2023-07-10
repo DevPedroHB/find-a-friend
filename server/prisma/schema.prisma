@@ -31,7 +31,7 @@ model Pet {
   size         String
   independence String
   type         String
-  photo        String
+  image_url    String
   org_id       String
 
   org Org @relation(fields: [org_id], references: [id])
@@ -43,9 +43,9 @@ model Pet {
 }
 
 model PetGallery {
-  id     String @id @default(uuid())
-  image  String
-  pet_id String
+  id        String @id @default(uuid())
+  image_url String
+  pet_id    String
 
   pet Pet @relation(fields: [pet_id], references: [id])
 
