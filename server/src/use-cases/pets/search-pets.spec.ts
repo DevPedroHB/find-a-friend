@@ -2,15 +2,15 @@ import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-
 import { PetParams } from "@/repositories/pets-repository";
 import { randomUUID } from "crypto";
 import { beforeEach, describe, expect, it } from "vitest";
-import { SearchPets } from "./search-pets";
+import { SearchPetsUseCase } from "./search-pets";
 
 let petsRepository: InMemoryPetsRepository;
-let sut: SearchPets;
+let sut: SearchPetsUseCase;
 
 describe("Search Pets Use Case", () => {
   beforeEach(async () => {
     petsRepository = new InMemoryPetsRepository();
-    sut = new SearchPets(petsRepository);
+    sut = new SearchPetsUseCase(petsRepository);
 
     await petsRepository.create({
       name: "Caramelinho",
