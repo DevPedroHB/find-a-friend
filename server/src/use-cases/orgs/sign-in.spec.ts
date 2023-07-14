@@ -1,5 +1,5 @@
 import { InMemoryOrgsRepository } from "@/repositories/in-memory/in-memory-orgs-repository";
-import { hash } from "bcryptjs";
+import { makeOrg } from "@/utils/test/factories/make-org";
 import { beforeEach, describe, expect, it } from "vitest";
 import { InvalidCredentialsError } from "../errors/invalid-credentials-error";
 import { SignInUseCase } from "./sign-in";
@@ -14,17 +14,10 @@ describe("Sign-In Use Case", () => {
   });
 
   it("should be able to sign-in", async () => {
-    await orgsRepository.create({
-      name: "Jhon Doe",
-      email: "jhondoe@example.com",
-      address: "123 Main Street",
-      cep: 13346360,
-      phone: 19991994368,
-      password_hash: await hash("123456", 6),
-    });
+    const orgCreated = await makeOrg(orgsRepository);
 
     const { org } = await sut.execute({
-      email: "jhondoe@example.com",
+      email: orgCreated.email,
       password: "123456",
     });
 
@@ -41,18 +34,11 @@ describe("Sign-In Use Case", () => {
   });
 
   it("should not be able to sign-in with wrong password", async () => {
-    await orgsRepository.create({
-      name: "Jhon Doe",
-      email: "jhondoe@example.com",
-      address: "123 Main Street",
-      cep: 13346360,
-      phone: 19991994368,
-      password_hash: await hash("123456", 6),
-    });
+    const orgCreated = await makeOrg(orgsRepository);
 
     await expect(() =>
       sut.execute({
-        email: "jhondoe@example.com",
+        email: orgCreated.email,
         password: "654321",
       })
     ).rejects.toBeInstanceOf(InvalidCredentialsError);

@@ -1,4 +1,4 @@
-import { Pet, Prisma } from "@prisma/client";
+import { AdoptionRequirements, Pet, Prisma } from "@prisma/client";
 
 export interface PetParams {
   age?: "cub" | "adolescent" | "elderly";
@@ -9,7 +9,12 @@ export interface PetParams {
 }
 
 export interface PetsRepository {
-  findById(id: string): Promise<Pet | null>;
+  findById(id: string): Promise<
+    | (Pet & {
+        adoptionRequirements: AdoptionRequirements[];
+      })
+    | null
+  >;
   searchMany(city: string, params?: PetParams): Promise<Pet[]>;
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>;
 }
