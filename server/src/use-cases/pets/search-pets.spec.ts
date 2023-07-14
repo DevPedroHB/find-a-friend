@@ -1,6 +1,6 @@
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
 import { PetParams } from "@/repositories/pets-repository";
-import { randomUUID } from "crypto";
+import { makePet } from "@/utils/test/factories/make-pet";
 import { beforeEach, describe, expect, it } from "vitest";
 import { SearchPetsUseCase } from "./search-pets";
 
@@ -12,31 +12,14 @@ describe("Search Pets Use Case", () => {
     petsRepository = new InMemoryPetsRepository();
     sut = new SearchPetsUseCase(petsRepository);
 
-    await petsRepository.create({
+    await makePet(petsRepository, {
       name: "Caramelinho",
-      age: "cub",
-      size: "medium",
       city: "Indaiatuba",
-      description: "Um doguinho para quem tem muito amor para dar",
-      energy: 3,
-      independence: "high",
-      type: "dog",
-      org_id: randomUUID(),
-      image_url: "caramelinho.jpeg",
     });
-
-    await petsRepository.create({
-      name: "Yoda",
-      age: "adolescent",
-      size: "small",
-      city: "Sao Paulo",
-      description: "Um companheiro para todas as horas",
-      energy: 5,
-      independence: "low",
-      type: "cat",
-      org_id: randomUUID(),
-      image_url: "yoda.jpeg",
+    await makePet(petsRepository, {
+      city: "Indaiatuba",
     });
+    await makePet(petsRepository);
   });
 
   it("should be able to list all pets available for adoption in a city", async () => {
@@ -44,22 +27,19 @@ describe("Search Pets Use Case", () => {
 
     const { pets } = await sut.execute({ city });
 
-    expect(pets).toHaveLength(1);
-    expect(pets).toEqual([expect.objectContaining({ name: "Caramelinho" })]);
+    expect(pets).toHaveLength(2);
   });
 
   it("should be able to search pets by some parameters (age, energy, independence, size, type)", async () => {
     const city = "Indaiatuba";
 
-    const params: PetParams = {
-      age: "cub",
-      energy: 3,
-      independence: "high",
-      size: "medium",
-      type: "dog",
-    };
+    const { age, energy, independence, size, type } = petsRepository
+      .items[0] as PetParams;
 
-    const { pets } = await sut.execute({ city, params });
+    const { pets } = await sut.execute({
+      city,
+      params: { age, energy, independence, size, type },
+    });
 
     expect(pets).toHaveLength(1);
     expect(pets).toEqual([expect.objectContaining({ name: "Caramelinho" })]);

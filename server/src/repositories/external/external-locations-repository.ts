@@ -15,9 +15,9 @@ export class ExternalLocationRepository implements LocationsRepository {
     return states;
   }
 
-  async findBrasilCitysByState(uf_code: string) {
+  async findBrasilCitysByState(ufCode: string) {
     const { data: cities } = await locationApi.get<IFindBrasilCitysByState[]>(
-      `/ibge/municipios/v1/${uf_code}`
+      `/ibge/municipios/v1/${ufCode}`
     );
 
     return cities;

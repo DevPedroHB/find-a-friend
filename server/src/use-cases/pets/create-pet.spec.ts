@@ -1,7 +1,7 @@
 import { ExternalLocationRepository } from "@/repositories/external/external-locations-repository";
 import { InMemoryOrgsRepository } from "@/repositories/in-memory/in-memory-orgs-repository";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
-import { hash } from "bcryptjs";
+import { makeOrg } from "@/utils/test/factories/make-org";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import { CreatePetUseCase } from "./create-pet";
@@ -24,14 +24,7 @@ describe("Create Pet Use Case", () => {
   });
 
   it("should be able to create a new pet", async () => {
-    const orgCreated = await orgsRepository.create({
-      name: "Jhon Doe",
-      email: "jhondoe@example.com",
-      address: "123 Main Street",
-      cep: 13346360,
-      phone: 19991994368,
-      password_hash: await hash("123456", 6),
-    });
+    const orgCreated = await makeOrg(orgsRepository);
 
     const { pet } = await sut.execute({
       name: "Caramelinho",

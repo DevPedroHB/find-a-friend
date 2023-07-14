@@ -1,8 +1,13 @@
 import { Pet, Prisma } from "@prisma/client";
 import { randomUUID } from "crypto";
+import { AdoptionRequirementsRepository } from "../adoption-requirements-repository";
 import { PetParams, PetsRepository } from "../pets-repository";
 
 export class InMemoryPetsRepository implements PetsRepository {
+  constructor(
+    private adoptionRequirementsRepository: AdoptionRequirementsRepository
+  ) {}
+
   public items: Pet[] = [];
 
   async findById(id: string) {
@@ -12,7 +17,15 @@ export class InMemoryPetsRepository implements PetsRepository {
       return null;
     }
 
-    return pet;
+    const adoptionRequirements =
+      await this.adoptionRequirementsRepository.findManyByPetId(id);
+
+    const petWithAdoptionRequirements = {
+      ...pet,
+      adoptionRequirements: adoptionRequirements,
+    };
+
+    return petWithAdoptionRequirements;
   }
 
   async searchMany(city: string, params?: PetParams) {
