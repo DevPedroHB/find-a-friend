@@ -40,8 +40,6 @@ describe("Get Pet Details Use Case", () => {
       pet_id: petCreated.id,
     });
 
-    console.log(pet);
-
     expect(pet.name).toEqual(petCreated.name);
   });
 

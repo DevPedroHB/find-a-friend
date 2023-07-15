@@ -1,11 +1,17 @@
 import fastifyCookie from "@fastify/cookie";
+import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
+import fastifyStatic from "@fastify/static";
 import fastify from "fastify";
+import multer from "fastify-multer";
+import path from "path";
 import { ZodError } from "zod";
 import { env } from "./env";
 import { orgsRoutes } from "./http/controllers/orgs/routes";
 
 export const app = fastify();
+
+app.register(cors);
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
@@ -16,6 +22,13 @@ app.register(fastifyJwt, {
   sign: {
     expiresIn: "10m",
   },
+});
+
+app.register(multer.contentParser);
+
+app.register(fastifyStatic, {
+  root: path.join(__dirname, "..", "uploads"),
+  prefix: "/images/",
 });
 
 app.register(fastifyCookie);
