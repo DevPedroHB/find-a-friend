@@ -1,4 +1,4 @@
-import { AdoptionRequirements, Prisma } from "@prisma/client";
+import { AdoptionRequirements } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { AdoptionRequirementsRepository } from "../adoption-requirements-repository";
 
@@ -7,11 +7,11 @@ export class InMemoryAdoptionRequirementsRepository
 {
   public items: AdoptionRequirements[] = [];
 
-  async create(data: Prisma.AdoptionRequirementsUncheckedCreateInput[]) {
-    const adoption_requirements: AdoptionRequirements[] = data.map((item) => ({
+  async create(requirements: string[], pet_id: string) {
+    const adoption_requirements = requirements.map((requirement) => ({
       id: randomUUID(),
-      title: item.title,
-      pet_id: item.pet_id,
+      title: requirement,
+      pet_id,
     }));
 
     this.items.push(...adoption_requirements);
@@ -19,9 +19,9 @@ export class InMemoryAdoptionRequirementsRepository
     return adoption_requirements;
   }
 
-  async findManyByPetId(petId: string) {
+  async findManyByPetId(pet_id: string) {
     const adoption_requirements = this.items.filter(
-      (ar) => ar.pet_id === petId
+      (item) => item.pet_id === pet_id
     );
 
     return adoption_requirements;

@@ -1,8 +1,9 @@
-import { AdoptionRequirements, Prisma } from "@prisma/client";
+import { AdoptionRequirements } from "@prisma/client";
 
 export interface AdoptionRequirementsRepository {
   create(
-    data: Prisma.AdoptionRequirementsUncheckedCreateInput[]
+    requirements: string[],
+    pet_id: string
   ): Promise<AdoptionRequirements[]>;
-  findManyByPetId(petId: string): Promise<AdoptionRequirements[]>;
+  findManyByPetId(pet_id: string): Promise<AdoptionRequirements[]>;
 }

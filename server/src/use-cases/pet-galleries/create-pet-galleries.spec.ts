@@ -4,55 +4,44 @@ import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-
 import { makePet } from "@/utils/test/factories/make-pet";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
-import { CreateAdoptionRequirementsUseCase } from "./create-adoption-requirements";
+import { CreatePetGalleriesUseCase } from "./create-pet-galleries";
 
-let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
 let petGalleriesRepository: InMemoryPetGalleriesRepository;
+let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
 let petsRepository: InMemoryPetsRepository;
-let sut: CreateAdoptionRequirementsUseCase;
+let sut: CreatePetGalleriesUseCase;
 
-describe("Create Adoption Requirements Use Case", () => {
+describe("Create Pet Galleries Use Case", () => {
   beforeEach(() => {
+    petGalleriesRepository = new InMemoryPetGalleriesRepository();
     adoptionRequirementsRepository =
       new InMemoryAdoptionRequirementsRepository();
-    petGalleriesRepository = new InMemoryPetGalleriesRepository();
     petsRepository = new InMemoryPetsRepository(
       adoptionRequirementsRepository,
       petGalleriesRepository
     );
-    sut = new CreateAdoptionRequirementsUseCase(
-      adoptionRequirementsRepository,
-      petsRepository
-    );
+    sut = new CreatePetGalleriesUseCase(petGalleriesRepository, petsRepository);
   });
 
-  it("should be able to create a new adoption requirements", async () => {
+  it("should be able to create a new pet galleries", async () => {
     const petCreated = await makePet(petsRepository);
 
-    const requirements = [
-      "Requerimento de adoção 1",
-      "Requerimento de adoção 2",
-      "Requerimento de adoção 3",
-    ];
+    const images = ["Imagem 1", "Imagem 2", "Imagem 3"];
 
-    const { adoption_requirements } = await sut.execute({
-      requirements,
+    const { pet_galleries } = await sut.execute({
+      images,
       pet_id: petCreated.id,
     });
 
-    expect(adoption_requirements).toHaveLength(3);
+    expect(pet_galleries).toHaveLength(3);
   });
 
-  it("should not be able to create a new adoption requirements with wrong pet_id", async () => {
-    const requirements = [
-      "Requerimento de adoção 1",
-      "Requerimento de adoção 2",
-      "Requerimento de adoção 3",
-    ];
+  it("should not be able to create a new pet galleries with wrong pet_id", async () => {
+    const images = ["Imagem 1", "Imagem 2", "Imagem 3"];
 
     await expect(() =>
       sut.execute({
-        requirements,
+        images,
         pet_id: "non-existing-id",
       })
     ).rejects.toBeInstanceOf(ResourceNotFoundError);
