@@ -7,21 +7,19 @@ export async function makeAdoptionRequirements(
   quantity = 1,
   override: Partial<AdoptionRequirements> = {}
 ) {
-  const adoptionRequirements = [];
+  const requirements: string[] = [];
+  const pet_id = override.pet_id ? override.pet_id : customFaker.string.uuid();
 
   for (let i = 0; i < quantity; i++) {
-    const newRequirement = {
-      title: customFaker.lorem.text(),
-      pet_id: customFaker.string.uuid(),
-      ...override,
-    };
-
-    adoptionRequirements.push(newRequirement);
+    requirements.push(
+      override.title ? override.title : customFaker.lorem.text()
+    );
   }
 
-  const createdRequirements = await adoptionRequirementsRepository.create(
-    adoptionRequirements
+  const adoption_requirements = await adoptionRequirementsRepository.create(
+    requirements,
+    pet_id
   );
 
-  return createdRequirements;
+  return adoption_requirements;
 }

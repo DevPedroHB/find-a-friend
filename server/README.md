@@ -104,17 +104,17 @@ Here are the main features of the project.
 - Functional Requirements:
   - [x] Deve ser possível cadastrar um pet;
   - [x] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade;
-  - [ ] Deve ser possível filtrar pets por suas características;
-  - [ ] Deve ser possível visualizar detalhes de um pet para adoção;
+  - [x] Deve ser possível filtrar pets por suas características;
+  - [x] Deve ser possível visualizar detalhes de um pet para adoção;
   - [x] Deve ser possível se cadastrar como uma ORG;
   - [x] Deve ser possível realizar login como uma ORG;
 - Business Rules:
-  - [ ] Para listar os pets, obrigatoriamente precisamos informar a cidade;
-  - [ ] Uma ORG precisa ter um endereço e um número de WhatsApp;
-  - [ ] Um pet deve estar ligado a uma ORG;
+  - [x] Para listar os pets, obrigatoriamente precisamos informar a cidade;
+  - [x] Uma ORG precisa ter um endereço e um número de WhatsApp;
+  - [x] Um pet deve estar ligado a uma ORG;
   - [ ] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp;
-  - [ ] Todos os filtros, além da cidade, são opcionais;
-  - [ ] Para uma ORG acessar a aplicação como admin, ela precisa estar logada;
+  - [x] Todos os filtros, além da cidade, são opcionais;
+  - [x] Para uma ORG acessar a aplicação como admin, ela precisa estar logada;
 - Endpoints:
   - Orgs:
     - POST /orgs/sign-up: sign-up of a new org.

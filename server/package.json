@@ -39,6 +39,7 @@
     "dev": "tsx watch src/server.ts",
     "lint": "eslint src --ext .ts --fix",
     "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
+    "pretest:ui": "run-s test:create-prisma-environment test:install-prisma-environment",
     "start": "node build/server.js",
     "test": "vitest run --dir src/use-cases",
     "test:coverage": "vitest run --coverage",

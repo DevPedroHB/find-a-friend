@@ -1,5 +1,7 @@
 import { ExternalLocationRepository } from "@/repositories/external/external-locations-repository";
+import { InMemoryAdoptionRequirementsRepository } from "@/repositories/in-memory/in-memory-adoption-requirements-repository";
 import { InMemoryOrgsRepository } from "@/repositories/in-memory/in-memory-orgs-repository";
+import { InMemoryPetGalleriesRepository } from "@/repositories/in-memory/in-memory-pet-galleries-repository";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
 import { makeOrg } from "@/utils/test/factories/make-org";
 import { beforeEach, describe, expect, it } from "vitest";
@@ -7,13 +9,21 @@ import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import { CreatePetUseCase } from "./create-pet";
 
 let petsRepository: InMemoryPetsRepository;
+let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
+let petGalleriesRepository: InMemoryPetGalleriesRepository;
 let orgsRepository: InMemoryOrgsRepository;
 let locationsRepository: ExternalLocationRepository;
 let sut: CreatePetUseCase;
 
 describe("Create Pet Use Case", () => {
   beforeEach(() => {
-    petsRepository = new InMemoryPetsRepository();
+    adoptionRequirementsRepository =
+      new InMemoryAdoptionRequirementsRepository();
+    petGalleriesRepository = new InMemoryPetGalleriesRepository();
+    petsRepository = new InMemoryPetsRepository(
+      adoptionRequirementsRepository,
+      petGalleriesRepository
+    );
     orgsRepository = new InMemoryOrgsRepository();
     locationsRepository = new ExternalLocationRepository();
     sut = new CreatePetUseCase(

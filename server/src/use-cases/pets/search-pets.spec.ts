@@ -1,3 +1,5 @@
+import { InMemoryAdoptionRequirementsRepository } from "@/repositories/in-memory/in-memory-adoption-requirements-repository";
+import { InMemoryPetGalleriesRepository } from "@/repositories/in-memory/in-memory-pet-galleries-repository";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
 import { PetParams } from "@/repositories/pets-repository";
 import { makePet } from "@/utils/test/factories/make-pet";
@@ -5,11 +7,19 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { SearchPetsUseCase } from "./search-pets";
 
 let petsRepository: InMemoryPetsRepository;
+let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
+let petGalleriesRepository: InMemoryPetGalleriesRepository;
 let sut: SearchPetsUseCase;
 
 describe("Search Pets Use Case", () => {
   beforeEach(async () => {
-    petsRepository = new InMemoryPetsRepository();
+    adoptionRequirementsRepository =
+      new InMemoryAdoptionRequirementsRepository();
+    petGalleriesRepository = new InMemoryPetGalleriesRepository();
+    petsRepository = new InMemoryPetsRepository(
+      adoptionRequirementsRepository,
+      petGalleriesRepository
+    );
     sut = new SearchPetsUseCase(petsRepository);
 
     await makePet(petsRepository, {

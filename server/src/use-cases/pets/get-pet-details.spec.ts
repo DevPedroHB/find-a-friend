@@ -1,20 +1,27 @@
 import { InMemoryAdoptionRequirementsRepository } from "@/repositories/in-memory/in-memory-adoption-requirements-repository";
+import { InMemoryPetGalleriesRepository } from "@/repositories/in-memory/in-memory-pet-galleries-repository";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
 import { makeAdoptionRequirements } from "@/utils/test/factories/make-adoption-requirements";
 import { makePet } from "@/utils/test/factories/make-pet";
+import { makePetGalleries } from "@/utils/test/factories/make-pet-galleries";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import { GetPetDetailsUseCase } from "./get-pet-details";
 
 let petsRepository: InMemoryPetsRepository;
 let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
+let petGalleriesRepository: InMemoryPetGalleriesRepository;
 let sut: GetPetDetailsUseCase;
 
 describe("Get Pet Details Use Case", () => {
   beforeEach(async () => {
     adoptionRequirementsRepository =
       new InMemoryAdoptionRequirementsRepository();
-    petsRepository = new InMemoryPetsRepository(adoptionRequirementsRepository);
+    petGalleriesRepository = new InMemoryPetGalleriesRepository();
+    petsRepository = new InMemoryPetsRepository(
+      adoptionRequirementsRepository,
+      petGalleriesRepository
+    );
     sut = new GetPetDetailsUseCase(petsRepository);
   });
 
@@ -25,9 +32,15 @@ describe("Get Pet Details Use Case", () => {
       pet_id: petCreated.id,
     });
 
+    await makePetGalleries(petGalleriesRepository, 3, {
+      pet_id: petCreated.id,
+    });
+
     const { pet } = await sut.execute({
       pet_id: petCreated.id,
     });
+
+    console.log(pet);
 
     expect(pet.name).toEqual(petCreated.name);
   });

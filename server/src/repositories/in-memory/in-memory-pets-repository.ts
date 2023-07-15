@@ -1,11 +1,13 @@
 import { Pet, Prisma } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { AdoptionRequirementsRepository } from "../adoption-requirements-repository";
+import { PetGalleriesRepository } from "../pet-galleries-repository";
 import { PetParams, PetsRepository } from "../pets-repository";
 
 export class InMemoryPetsRepository implements PetsRepository {
   constructor(
-    private adoptionRequirementsRepository: AdoptionRequirementsRepository
+    private adoptionRequirementsRepository: AdoptionRequirementsRepository,
+    private petGalleriesRepository: PetGalleriesRepository
   ) {}
 
   public items: Pet[] = [];
@@ -19,13 +21,15 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     const adoptionRequirements =
       await this.adoptionRequirementsRepository.findManyByPetId(id);
+    const petGalleries = await this.petGalleriesRepository.findManyByPetId(id);
 
-    const petWithAdoptionRequirements = {
+    const petWithAdoptionRequirementsAndPetGalleries = {
       ...pet,
-      adoptionRequirements: adoptionRequirements,
+      adoptionRequirements,
+      petGalleries,
     };
 
-    return petWithAdoptionRequirements;
+    return petWithAdoptionRequirementsAndPetGalleries;
   }
 
   async searchMany(city: string, params?: PetParams) {
@@ -45,16 +49,7 @@ export class InMemoryPetsRepository implements PetsRepository {
   async create(data: Prisma.PetUncheckedCreateInput) {
     const pet = {
       id: randomUUID(),
-      name: data.name,
-      description: data.description,
-      city: data.city,
-      age: data.age,
-      energy: data.energy,
-      size: data.size,
-      independence: data.independence,
-      type: data.type,
-      image_url: data.image_url,
-      org_id: data.org_id,
+      ...data,
     };
 
     this.items.push(pet);
