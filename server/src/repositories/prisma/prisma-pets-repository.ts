@@ -9,8 +9,8 @@ export class PrismaPetsRepository implements PetsRepository {
         id,
       },
       include: {
-        adoptionRequirements: true,
-        petGalleries: true,
+        adoption_requirements: true,
+        pet_galleries: true,
       },
     });
 

@@ -7,7 +7,7 @@ import { SearchPetsUseCase } from "../pets/search-pets";
 
 const petsRepository = new PrismaPetsRepository();
 
-export function makeCreatePetUseCae() {
+export function makeCreatePetUseCase() {
   const orgsRepository = new PrismaOrgsRepository();
   const locationRepository = new ExternalLocationRepository();
 

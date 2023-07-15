@@ -19,14 +19,14 @@ export class InMemoryPetsRepository implements PetsRepository {
       return null;
     }
 
-    const adoptionRequirements =
+    const adoption_requirements =
       await this.adoptionRequirementsRepository.findManyByPetId(id);
-    const petGalleries = await this.petGalleriesRepository.findManyByPetId(id);
+    const pet_galleries = await this.petGalleriesRepository.findManyByPetId(id);
 
     const petWithAdoptionRequirementsAndPetGalleries = {
       ...pet,
-      adoptionRequirements,
-      petGalleries,
+      adoption_requirements,
+      pet_galleries,
     };
 
     return petWithAdoptionRequirementsAndPetGalleries;

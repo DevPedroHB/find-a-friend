@@ -11,8 +11,8 @@ export interface PetParams {
 export interface PetsRepository {
   findById(id: string): Promise<
     | (Pet & {
-        adoptionRequirements: AdoptionRequirements[];
-        petGalleries: PetGallery[];
+        adoption_requirements: AdoptionRequirements[];
+        pet_galleries: PetGallery[];
       })
     | null
   >;

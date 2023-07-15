@@ -36,8 +36,8 @@ model Pet {
 
   org Org @relation(fields: [org_id], references: [id])
 
-  petGalleries         PetGallery[]
-  adoptionRequirements AdoptionRequirements[]
+  pet_galleries         PetGallery[]
+  adoption_requirements AdoptionRequirements[]
 
   @@map("pets")
 }

@@ -22,7 +22,7 @@ CREATE TABLE "pets" (
     "size" TEXT NOT NULL,
     "independence" TEXT NOT NULL,
     "type" TEXT NOT NULL,
-    "photo" TEXT NOT NULL,
+    "image_url" TEXT NOT NULL,
     "org_id" TEXT NOT NULL,
 
     CONSTRAINT "pets_pkey" PRIMARY KEY ("id")
@@ -31,7 +31,7 @@ CREATE TABLE "pets" (
 -- CreateTable
 CREATE TABLE "pet_galleries" (
     "id" TEXT NOT NULL,
-    "image" TEXT NOT NULL,
+    "image_url" TEXT NOT NULL,
     "pet_id" TEXT NOT NULL,
 
     CONSTRAINT "pet_galleries_pkey" PRIMARY KEY ("id")
