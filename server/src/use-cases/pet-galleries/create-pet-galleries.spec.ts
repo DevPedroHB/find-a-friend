@@ -1,6 +1,8 @@
 import { InMemoryAdoptionRequirementsRepository } from "@/repositories/in-memory/in-memory-adoption-requirements-repository";
+import { InMemoryOrgsRepository } from "@/repositories/in-memory/in-memory-orgs-repository";
 import { InMemoryPetGalleriesRepository } from "@/repositories/in-memory/in-memory-pet-galleries-repository";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
+import { makeOrg } from "@/utils/test/factories/make-org";
 import { makePet } from "@/utils/test/factories/make-pet";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
@@ -8,6 +10,7 @@ import { CreatePetGalleriesUseCase } from "./create-pet-galleries";
 
 let petGalleriesRepository: InMemoryPetGalleriesRepository;
 let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
+let orgsRepository: InMemoryOrgsRepository;
 let petsRepository: InMemoryPetsRepository;
 let sut: CreatePetGalleriesUseCase;
 
@@ -16,15 +19,20 @@ describe("Create Pet Galleries Use Case", () => {
     petGalleriesRepository = new InMemoryPetGalleriesRepository();
     adoptionRequirementsRepository =
       new InMemoryAdoptionRequirementsRepository();
+    orgsRepository = new InMemoryOrgsRepository();
     petsRepository = new InMemoryPetsRepository(
       adoptionRequirementsRepository,
-      petGalleriesRepository
+      petGalleriesRepository,
+      orgsRepository
     );
     sut = new CreatePetGalleriesUseCase(petGalleriesRepository, petsRepository);
   });
 
   it("should be able to create a new pet galleries", async () => {
-    const petCreated = await makePet(petsRepository);
+    const orgCreated = await makeOrg(orgsRepository);
+    const petCreated = await makePet(petsRepository, {
+      org_id: orgCreated.id,
+    });
 
     const images = ["Imagem 1", "Imagem 2", "Imagem 3"];
 

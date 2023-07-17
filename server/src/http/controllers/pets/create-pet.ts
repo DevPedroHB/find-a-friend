@@ -7,7 +7,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function createPet(request: FastifyRequest, reply: FastifyReply) {
-  const createPetBodySchema = z.object({
+  const bodySchema = z.object({
     name: z.string(),
     description: z.string(),
     age: z.enum(["cub", "adolescent", "elderly"]),
@@ -15,20 +15,19 @@ export async function createPet(request: FastifyRequest, reply: FastifyReply) {
     size: z.enum(["small", "medium", "big"]),
     independence: z.enum(["low", "medium", "high"]),
     type: z.enum(["dog", "cat"]),
-    requirements: z.string(),
+    requirements: z.string().transform((data) => JSON.parse(data) as string[]),
   });
 
-  const createPetBody = createPetBodySchema.parse(request.body);
+  const { requirements, ...body } = bodySchema.parse(request.body);
   const org_id = request.user.sub;
   const images = request.files.map((file) => String(file.filename));
-  const parsedRequirements = JSON.parse(createPetBody.requirements);
 
   try {
     if (images.length <= 0) {
       throw new ResourceNotFoundError();
     }
 
-    if (parsedRequirements.length <= 0) {
+    if (requirements.length <= 0) {
       throw new ResourceNotFoundError();
     }
 
@@ -40,11 +39,11 @@ export async function createPet(request: FastifyRequest, reply: FastifyReply) {
     const { pet } = await createPetUseCase.execute({
       image_url: images[0],
       org_id,
-      ...createPetBody,
+      ...body,
     });
 
     await createAdoptionRequirementsUseCase.execute({
-      requirements: parsedRequirements,
+      requirements,
       pet_id: pet.id,
     });
 

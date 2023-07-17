@@ -20,11 +20,12 @@ describe("Create Pet Use Case", () => {
     adoptionRequirementsRepository =
       new InMemoryAdoptionRequirementsRepository();
     petGalleriesRepository = new InMemoryPetGalleriesRepository();
+    orgsRepository = new InMemoryOrgsRepository();
     petsRepository = new InMemoryPetsRepository(
       adoptionRequirementsRepository,
-      petGalleriesRepository
+      petGalleriesRepository,
+      orgsRepository
     );
-    orgsRepository = new InMemoryOrgsRepository();
     locationsRepository = new ExternalLocationRepository();
     sut = new CreatePetUseCase(
       petsRepository,

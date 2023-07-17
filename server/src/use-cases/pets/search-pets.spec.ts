@@ -1,4 +1,5 @@
 import { InMemoryAdoptionRequirementsRepository } from "@/repositories/in-memory/in-memory-adoption-requirements-repository";
+import { InMemoryOrgsRepository } from "@/repositories/in-memory/in-memory-orgs-repository";
 import { InMemoryPetGalleriesRepository } from "@/repositories/in-memory/in-memory-pet-galleries-repository";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
 import { PetParams } from "@/repositories/pets-repository";
@@ -9,6 +10,7 @@ import { SearchPetsUseCase } from "./search-pets";
 let petsRepository: InMemoryPetsRepository;
 let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
 let petGalleriesRepository: InMemoryPetGalleriesRepository;
+let orgsRepository: InMemoryOrgsRepository;
 let sut: SearchPetsUseCase;
 
 describe("Search Pets Use Case", () => {
@@ -16,9 +18,11 @@ describe("Search Pets Use Case", () => {
     adoptionRequirementsRepository =
       new InMemoryAdoptionRequirementsRepository();
     petGalleriesRepository = new InMemoryPetGalleriesRepository();
+    orgsRepository = new InMemoryOrgsRepository();
     petsRepository = new InMemoryPetsRepository(
       adoptionRequirementsRepository,
-      petGalleriesRepository
+      petGalleriesRepository,
+      orgsRepository
     );
     sut = new SearchPetsUseCase(petsRepository);
 

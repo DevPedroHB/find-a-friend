@@ -12,7 +12,7 @@ model Org {
   name          String
   email         String @unique
   address       String
-  cep           BigInt
+  cep           Int
   phone         BigInt
   password_hash String
 

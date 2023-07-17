@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { refreshToken } from "./refresh-token";
+import { signIn } from "./sign-in";
 import { signUp } from "./sign-up";
-import { signIn } from "./sing-in";
 
 export async function orgsRoutes(app: FastifyInstance) {
   app.post("/sign-up", signUp);

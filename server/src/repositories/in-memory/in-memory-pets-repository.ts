@@ -1,13 +1,15 @@
 import { Pet, Prisma } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { AdoptionRequirementsRepository } from "../adoption-requirements-repository";
+import { OrgsRepository } from "../orgs-repository";
 import { PetGalleriesRepository } from "../pet-galleries-repository";
 import { PetParams, PetsRepository } from "../pets-repository";
 
 export class InMemoryPetsRepository implements PetsRepository {
   constructor(
     private adoptionRequirementsRepository: AdoptionRequirementsRepository,
-    private petGalleriesRepository: PetGalleriesRepository
+    private petGalleriesRepository: PetGalleriesRepository,
+    private orgsRepository: OrgsRepository
   ) {}
 
   public items: Pet[] = [];
@@ -22,11 +24,17 @@ export class InMemoryPetsRepository implements PetsRepository {
     const adoption_requirements =
       await this.adoptionRequirementsRepository.findManyByPetId(id);
     const pet_galleries = await this.petGalleriesRepository.findManyByPetId(id);
+    const org = await this.orgsRepository.findById(pet.org_id);
+
+    if (!org) {
+      return null;
+    }
 
     const petWithAdoptionRequirementsAndPetGalleries = {
       ...pet,
       adoption_requirements,
       pet_galleries,
+      org,
     };
 
     return petWithAdoptionRequirementsAndPetGalleries;

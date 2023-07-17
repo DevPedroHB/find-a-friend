@@ -11,6 +11,7 @@ export class PrismaPetsRepository implements PetsRepository {
       include: {
         adoption_requirements: true,
         pet_galleries: true,
+        org: true,
       },
     });
 

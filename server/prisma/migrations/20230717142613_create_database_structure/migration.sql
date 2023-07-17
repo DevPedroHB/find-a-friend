@@ -4,7 +4,7 @@ CREATE TABLE "orgs" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "address" TEXT NOT NULL,
-    "cep" BIGINT NOT NULL,
+    "cep" INTEGER NOT NULL,
     "phone" BIGINT NOT NULL,
     "password_hash" TEXT NOT NULL,
 

@@ -28,6 +28,8 @@ export default <Environment>{
 
     execSync("npx prisma migrate deploy");
 
+    execSync("npx prisma db seed");
+
     return {
       async teardown() {
         await prisma.$executeRawUnsafe(

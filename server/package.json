@@ -37,6 +37,9 @@
   "license": "ISC",
   "main": "index.js",
   "name": "find-a-friend",
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "scripts": {
     "build": "tsup src --out-dir build",
     "dev": "tsx watch src/server.ts",

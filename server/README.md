@@ -117,9 +117,11 @@ Here are the main features of the project.
   - [x] Para uma ORG acessar a aplicação como admin, ela precisa estar logada;
 - Endpoints:
   - Orgs:
-    - POST /orgs/sign-up: sign-up of a new org.
-    - POST /orgs/sign-in: sign-in with an org.
+    - POST /orgs/sign-up: Sign-up of a new org.
+    - POST /orgs/sign-in: Sign-in with an org.
     - PATCH /orgs/token/refresh: JWT token update.
+  - Pets:
+    - POST /pets: Create a new pet.
 
 ## 📎 Links
 

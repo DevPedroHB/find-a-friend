@@ -1,15 +1,17 @@
+import { env } from "@/env";
 import { PetsRepository } from "@/repositories/pets-repository";
-import { AdoptionRequirements, Pet, PetGallery } from "@prisma/client";
+import { AdoptionRequirements, Org, Pet, PetGallery } from "@prisma/client";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 interface GetPetDetailsUseCaseRequest {
-  pet_id: string;
+  id: string;
 }
 
 interface GetPetDetailsUseCaseResponse {
   pet: Pet & {
     adoption_requirements: AdoptionRequirements[];
     pet_galleries: PetGallery[];
+    org: Org;
   };
 }
 
@@ -17,16 +19,23 @@ export class GetPetDetailsUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({
-    pet_id,
+    id,
   }: GetPetDetailsUseCaseRequest): Promise<GetPetDetailsUseCaseResponse> {
-    const pet = await this.petsRepository.findById(pet_id);
+    const pet = await this.petsRepository.findById(id);
 
     if (!pet) {
       throw new ResourceNotFoundError();
     }
 
     return {
-      pet,
+      pet: {
+        ...pet,
+        image_url: `${env.APP_URL}/images/${pet.image_url}`,
+        pet_galleries: pet.pet_galleries.map((pet_gallery) => ({
+          ...pet_gallery,
+          image_url: `${env.APP_URL}/images/${pet_gallery.image_url}`,
+        })),
+      },
     };
   }
 }

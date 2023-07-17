@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { PetParams, PetsRepository } from "@/repositories/pets-repository";
 import { Pet } from "@prisma/client";
 
@@ -20,7 +21,10 @@ export class SearchPetsUseCase {
     const pets = await this.petsRepository.searchMany(city, params);
 
     return {
-      pets,
+      pets: pets.map((pet) => ({
+        ...pet,
+        image_url: `${env.APP_URL}/images/${pet.image_url}`,
+      })),
     };
   }
 }

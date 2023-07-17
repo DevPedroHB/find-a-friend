@@ -1,4 +1,10 @@
-import { AdoptionRequirements, Pet, PetGallery, Prisma } from "@prisma/client";
+import {
+  AdoptionRequirements,
+  Org,
+  Pet,
+  PetGallery,
+  Prisma,
+} from "@prisma/client";
 
 export interface PetParams {
   age?: "cub" | "adolescent" | "elderly";
@@ -13,6 +19,7 @@ export interface PetsRepository {
     | (Pet & {
         adoption_requirements: AdoptionRequirements[];
         pet_galleries: PetGallery[];
+        org: Org;
       })
     | null
   >;
