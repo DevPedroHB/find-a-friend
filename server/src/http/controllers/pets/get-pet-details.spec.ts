@@ -16,8 +16,6 @@ describe("Get Pet Details (e2e)", () => {
       "/pets/details/137d9eb5-aae2-4aa2-958a-525ec830dde9"
     );
 
-    console.log(response.body);
-
     expect(response.statusCode).toEqual(200);
   });
 });

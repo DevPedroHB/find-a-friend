@@ -1,4 +1,4 @@
-import { ExternalLocationRepository } from "@/repositories/external/external-locations-repository";
+import { BrasilApiLocationsRepository } from "@/repositories/brasil-api/brasil-api-locations-repository";
 import { InMemoryAdoptionRequirementsRepository } from "@/repositories/in-memory/in-memory-adoption-requirements-repository";
 import { InMemoryOrgsRepository } from "@/repositories/in-memory/in-memory-orgs-repository";
 import { InMemoryPetGalleriesRepository } from "@/repositories/in-memory/in-memory-pet-galleries-repository";
@@ -12,7 +12,7 @@ let petsRepository: InMemoryPetsRepository;
 let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
 let petGalleriesRepository: InMemoryPetGalleriesRepository;
 let orgsRepository: InMemoryOrgsRepository;
-let locationsRepository: ExternalLocationRepository;
+let locationsRepository: BrasilApiLocationsRepository;
 let sut: CreatePetUseCase;
 
 describe("Create Pet Use Case", () => {
@@ -26,7 +26,7 @@ describe("Create Pet Use Case", () => {
       petGalleriesRepository,
       orgsRepository
     );
-    locationsRepository = new ExternalLocationRepository();
+    locationsRepository = new BrasilApiLocationsRepository();
     sut = new CreatePetUseCase(
       petsRepository,
       orgsRepository,

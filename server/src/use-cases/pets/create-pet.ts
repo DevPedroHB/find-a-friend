@@ -45,14 +45,18 @@ export class CreatePetUseCase {
       throw new ResourceNotFoundError();
     }
 
-    const { city } = await this.locationsRepository.findGeoLocationByCEP(
-      Number(org.cep)
+    const location = await this.locationsRepository.findGeoLocationByCEP(
+      org.cep
     );
+
+    if (!location) {
+      throw new ResourceNotFoundError();
+    }
 
     const pet = await this.petsRepository.create({
       name,
       description,
-      city: titleize(city),
+      city: titleize(location.city),
       age,
       energy,
       size,

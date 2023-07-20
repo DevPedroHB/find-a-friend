@@ -1,4 +1,4 @@
-export interface IFindBrasilStates {
+export interface IGetBrasilStates {
   id: number;
   sigla: string;
   nome: string;
@@ -31,7 +31,9 @@ export interface IFindGeoLocationByCEP {
 }
 
 export interface LocationsRepository {
-  findBrasilStates(): Promise<IFindBrasilStates[]>;
-  findBrasilCitysByState(uf_code: string): Promise<IFindBrasilCitysByState[]>;
-  findGeoLocationByCEP(cep: number): Promise<IFindGeoLocationByCEP>;
+  getBrazilStates(): Promise<IGetBrasilStates[]>;
+  findBrazilCitiesByState(
+    uf_code: string
+  ): Promise<IFindBrasilCitysByState[] | null>;
+  findGeoLocationByCEP(cep: number): Promise<IFindGeoLocationByCEP | null>;
 }

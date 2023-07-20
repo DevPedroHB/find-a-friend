@@ -15,6 +15,6 @@ describe("Search Pets (e2e)", () => {
     const response = await request(app.server).get("/pets/Sao Paulo?type=dog");
 
     expect(response.statusCode).toEqual(200);
-    expect(response.body).toHaveLength(2);
+    expect(response.body.pets).toHaveLength(2);
   });
 });

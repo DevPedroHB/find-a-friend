@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export const locationApi = axios.create({
+export const brasilApi = axios.create({
   baseURL: "https://brasilapi.com.br/api",
 });
