@@ -23,7 +23,7 @@ export class SearchPetsUseCase {
     return {
       pets: pets.map((pet) => ({
         ...pet,
-        image_url: `${env.APP_URL}/images/${pet.image_url}`,
+        image_url: `${env.RENDER_EXTERNAL_URL}/images/${pet.image_url}`,
       })),
     };
   }

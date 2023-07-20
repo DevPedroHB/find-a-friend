@@ -30,10 +30,10 @@ export class GetPetDetailsUseCase {
     return {
       pet: {
         ...pet,
-        image_url: `${env.APP_URL}/images/${pet.image_url}`,
+        image_url: `${env.RENDER_EXTERNAL_URL}/images/${pet.image_url}`,
         pet_galleries: pet.pet_galleries.map((pet_gallery) => ({
           ...pet_gallery,
-          image_url: `${env.APP_URL}/images/${pet_gallery.image_url}`,
+          image_url: `${env.RENDER_EXTERNAL_URL}/images/${pet_gallery.image_url}`,
         })),
       },
     };
