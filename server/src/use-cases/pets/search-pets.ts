@@ -19,12 +19,11 @@ export class SearchPetsUseCase {
     params,
   }: SearchPetsUseCaseRequest): Promise<SearchPetsUseCaseResponse> {
     const pets = await this.petsRepository.searchMany(city, params);
-    const appURL = env.APP_URL ? env.APP_URL : "http://localhost:3333";
 
     return {
       pets: pets.map((pet) => ({
         ...pet,
-        image_url: `${appURL}/images/${pet.image_url}`,
+        image_url: `${env.APP_URL}/images/${pet.image_url}`,
       })),
     };
   }

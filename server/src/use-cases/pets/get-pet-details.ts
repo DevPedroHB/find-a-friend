@@ -22,7 +22,6 @@ export class GetPetDetailsUseCase {
     id,
   }: GetPetDetailsUseCaseRequest): Promise<GetPetDetailsUseCaseResponse> {
     const pet = await this.petsRepository.findById(id);
-    const appURL = env.APP_URL ? env.APP_URL : "http://localhost:3333";
 
     if (!pet) {
       throw new ResourceNotFoundError();
@@ -31,10 +30,10 @@ export class GetPetDetailsUseCase {
     return {
       pet: {
         ...pet,
-        image_url: `${appURL}/images/${pet.image_url}`,
+        image_url: `${env.APP_URL}/images/${pet.image_url}`,
         pet_galleries: pet.pet_galleries.map((pet_gallery) => ({
           ...pet_gallery,
-          image_url: `${appURL}/images/${pet_gallery.image_url}`,
+          image_url: `${env.APP_URL}/images/${pet_gallery.image_url}`,
         })),
       },
     };
