@@ -10,8 +10,6 @@
   <a href="#-packages">Packages</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-features">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-links">Links</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-versioning">Versioning</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#memo-license">License</a>
 </p>
 
@@ -128,17 +126,6 @@ Here are the main features of the project.
     - GET /locations/states: List all states from Brazil.
     - GET /locations/cities/{uf_code}: List all cities from a uf code.
     - GET /locations/geo/{cep}: List the location of a zip code.
-
-## 📎 Links
-
-- Deploy on [](): Coming soon.
-- Repository: https://github.com/DevPedroHB/find-a-friend
-
-## 🔰 Versioning
-
-Here are the versions of the parts of the project.
-
-- API -> 1.0.0
 
 ## :memo: License
 
