@@ -21,7 +21,7 @@
 ## 📎 Links
 
 - API: <a href="server">README.md</a>
-- Deploy on [](): Coming soon.
+- Deploy API on [Render](https://render.com/): https://find-a-friend-api-srvo.onrender.com/
 - Repository: https://github.com/DevPedroHB/find-a-friend
 
 ## 🔰 Versioning
