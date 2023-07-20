@@ -1,4 +1,4 @@
-import { makeSearchPetsUseCase } from "@/use-cases/factories/make-pets-use-case";
+import { makeSearchPetsUseCase } from "@/use-cases/factories/make-search-pets-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

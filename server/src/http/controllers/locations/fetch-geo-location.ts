@@ -1,5 +1,5 @@
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { makeFetchGeoLocationUseCase } from "@/use-cases/factories/make-locations-use-case";
+import { makeFetchGeoLocationUseCase } from "@/use-cases/factories/make-fetch-geo-location-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

@@ -1,8 +1,8 @@
 import { env } from "@/env";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { makeCreateAdoptionRequirementsUseCase } from "@/use-cases/factories/make-adoption-requirements-use-case";
-import { makeCreatePetGalleriesUseCase } from "@/use-cases/factories/make-pet-galleries-use-case";
-import { makeCreatePetUseCase } from "@/use-cases/factories/make-pets-use-case";
+import { makeCreateAdoptionRequirementsUseCase } from "@/use-cases/factories/make-create-adoption-requirements-use-case";
+import { makeCreatePetGalleriesUseCase } from "@/use-cases/factories/make-create-pet-galleries-use-case";
+import { makeCreatePetUseCase } from "@/use-cases/factories/make-create-pet-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

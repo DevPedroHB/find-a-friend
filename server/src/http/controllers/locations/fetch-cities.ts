@@ -1,5 +1,5 @@
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { makeFetchCitiesUseCase } from "@/use-cases/factories/make-locations-use-case";
+import { makeFetchCitiesUseCase } from "@/use-cases/factories/make-fetch-cities-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

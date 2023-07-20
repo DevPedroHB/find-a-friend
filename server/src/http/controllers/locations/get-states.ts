@@ -1,4 +1,4 @@
-import { makeGetStatesUseCase } from "@/use-cases/factories/make-locations-use-case";
+import { makeGetStatesUseCase } from "@/use-cases/factories/make-get-states-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getStates(_request: FastifyRequest, reply: FastifyReply) {

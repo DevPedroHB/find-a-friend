@@ -1,5 +1,5 @@
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { makeGetPetDetailsUseCase } from "@/use-cases/factories/make-pets-use-case";
+import { makeGetPetDetailsUseCase } from "@/use-cases/factories/make-get-pet-details-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
