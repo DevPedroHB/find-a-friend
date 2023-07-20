@@ -7,6 +7,7 @@ import multer from "fastify-multer";
 import path from "path";
 import { ZodError } from "zod";
 import { env } from "./env";
+import { locationsRoutes } from "./http/controllers/locations/routes";
 import { orgsRoutes } from "./http/controllers/orgs/routes";
 import { petsRoutes } from "./http/controllers/pets/routes";
 
@@ -35,6 +36,7 @@ app.register(fastifyStatic, {
 app.register(fastifyCookie);
 app.register(orgsRoutes, { prefix: "/orgs" });
 app.register(petsRoutes, { prefix: "/pets" });
+app.register(locationsRoutes, { prefix: "/locations" });
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
