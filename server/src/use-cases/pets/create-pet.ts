@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { LocationsRepository } from "@/repositories/locations-repository";
 import { OrgsRepository } from "@/repositories/orgs-repository";
 import { PetsRepository } from "@/repositories/pets-repository";
@@ -67,7 +68,10 @@ export class CreatePetUseCase {
     });
 
     return {
-      pet,
+      pet: {
+        ...pet,
+        image_url: `${env.RENDER_EXTERNAL_URL}/images/${pet.image_url}`,
+      },
     };
   }
 }

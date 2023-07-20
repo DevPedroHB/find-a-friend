@@ -1,4 +1,3 @@
-import { env } from "@/env";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 import { makeCreateAdoptionRequirementsUseCase } from "@/use-cases/factories/make-create-adoption-requirements-use-case";
 import { makeCreatePetGalleriesUseCase } from "@/use-cases/factories/make-create-pet-galleries-use-case";
@@ -53,10 +52,7 @@ export async function createPet(request: FastifyRequest, reply: FastifyReply) {
     });
 
     return reply.status(201).send({
-      pet: {
-        ...pet,
-        image_url: `${env.APP_URL}/images/${pet.image_url}`,
-      },
+      pet,
     });
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
