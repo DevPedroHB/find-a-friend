@@ -1,13 +1,15 @@
 import { cva } from "class-variance-authority";
 
 export const selectTrigger = cva(
-  "flex items-center justify-center rounded-3xl focus:outline-transparent",
+  "flex items-center justify-center focus:outline-transparent",
   {
     variants: {
       variant: {
         primary:
-          "bg-coral-500 gap-1 h-[4.375rem] px-3 font-extrabold text-xl border border-white",
-        secondary: "bg-coral-600 gap-2 h-[4.5rem] px-4 font-extrabold text-xl",
+          "bg-coral-500 gap-1 rounded-3xl h-[4.375rem] px-3 font-extrabold text-xl border border-white",
+        secondary:
+          "bg-coral-600 rounded-3xl gap-2 h-[4.5rem] px-4 font-extrabold text-xl",
+        tertiary: "bg-baby-pink-200 h-12 px-4 rounded-2xl gap-4",
       },
     },
     defaultVariants: {
@@ -16,12 +18,13 @@ export const selectTrigger = cva(
   },
 );
 
-export const selectContent = cva("rounded-3xl overflow-hidden", {
+export const selectContent = cva("overflow-hidden", {
   variants: {
     variant: {
       primary:
-        "bg-coral-500 font-extrabold text-xl text-white border border-white",
-      secondary: "bg-coral-600 font-extrabold text-xl text-white",
+        "bg-coral-500 font-extrabold text-xl rounded-3xl text-white border border-white",
+      secondary: "bg-coral-600 font-extrabold text-xl text-white rounded-3xl",
+      tertiary: "bg-baby-pink-200 text-midnight-blue-800 rounded-2xl",
     },
   },
   defaultVariants: {
@@ -34,6 +37,7 @@ export const selectIcon = cva("mx-auto", {
     variant: {
       primary: "w-4 h-4",
       secondary: "w-4 h-4",
+      tertiary: "w-6 h-6",
     },
   },
   defaultVariants: {
@@ -42,14 +46,16 @@ export const selectIcon = cva("mx-auto", {
 });
 
 export const selectItem = cva(
-  "flex items-center rounded-3xl transition-colors cursor-pointer my-1 focus:outline-transparent",
+  "flex items-center transition-colors cursor-pointer my-1 focus:outline-transparent",
   {
     variants: {
       variant: {
         primary:
-          "gap-1 px-3 hover:bg-coral-600 data-[state=checked]:bg-coral-600",
+          "gap-1 px-3 rounded-3xl hover:bg-coral-600 data-[state=checked]:bg-coral-600",
         secondary:
-          "gap-2 px-4 hover:bg-coral-500 data-[state=checked]:bg-coral-500",
+          "gap-2 px-4 rounded-3xl hover:bg-coral-500 data-[state=checked]:bg-coral-500",
+        tertiary:
+          "gap-4 px-4 rounded-2xl hover:bg-baby-pink-300 data-[state=checked]:bg-baby-pink-300",
       },
     },
     defaultVariants: {

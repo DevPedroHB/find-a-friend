@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <img alt="FindAFriend" src=".github/home.png" width="100%">
+  <img alt="FindAFriend" src=".github/images/home.png" width="100%">
 </p>
 
 ## 🚀 Technologies

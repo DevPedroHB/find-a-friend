@@ -19,6 +19,11 @@ module.exports = {
         "midnight-blue": {
           800: "#0D3B66",
         },
+        "baby-pink": {
+          100: "#FDECED",
+          200: "#FBE1E2",
+          300: "#e1cacb",
+        },
       },
       boxShadow: {
         focus: "0 0 0 1px #fff",

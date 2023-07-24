@@ -1,10 +1,10 @@
+import { FetchAFriendForm } from "@/components/FetchAFriendForm";
 import { getStates } from "@/functions";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import heroImg from "public/images/hero.svg";
 import logoWithTextImg from "public/images/logo-with-text.svg";
-import { FetchAFriendForm } from "./components/FetchAFriendForm";
 
 export const metadata: Metadata = {
   title: "FindAFriend | Home",
