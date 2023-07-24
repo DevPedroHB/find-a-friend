@@ -13,8 +13,6 @@ import { petsRoutes } from "./http/controllers/pets/routes";
 
 export const app = fastify();
 
-app.register(cors);
-
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
   cookie: {
