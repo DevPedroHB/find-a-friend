@@ -6,7 +6,6 @@
 
 <p align="center">
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#-services">Services</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-packages">Packages</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-features">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -26,12 +25,6 @@ Here are the technologies used in this project.
 - Fastify 4.19.2
 - Vitest 0.33.0
 - Prisma 4.16.2
-
-## 📋 Services
-
-Here are the services used in this project.
-
-- [GitHub](https://github.com/)
 
 ## 📦 Packages
 
