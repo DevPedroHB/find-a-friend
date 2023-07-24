@@ -3,6 +3,7 @@ import {
   LocationsRepository,
 } from "@/repositories/locations-repository";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
+import { titleize } from "@/utils/titleize";
 
 interface FetchCitiesUseCaseRequest {
   uf_code: string;
@@ -27,7 +28,10 @@ export class FetchCitiesUseCase {
     }
 
     return {
-      cities,
+      cities: cities.map((city) => ({
+        ...city,
+        nome: titleize(city.nome),
+      })),
     };
   }
 }

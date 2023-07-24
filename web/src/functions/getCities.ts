@@ -1,0 +1,16 @@
+export interface Cities {
+  nome: string;
+  codigo_ibge: string;
+}
+
+interface IResponse {
+  cities: Cities[];
+}
+
+export async function getCities(uf_code: string): Promise<IResponse> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/locations/cities/${uf_code}`,
+  );
+
+  return response.json();
+}
