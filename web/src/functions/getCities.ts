@@ -9,7 +9,7 @@ interface IResponse {
 
 export async function getCities(uf_code: string): Promise<IResponse> {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/locations/cities/${uf_code}`,
+    `https://find-a-friend-api-srvo.onrender.com/locations/cities/${uf_code}`,
   );
 
   return response.json();

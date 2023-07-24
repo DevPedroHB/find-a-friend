@@ -15,7 +15,7 @@ interface IResponse {
 
 export async function getStates(): Promise<IResponse> {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/locations/states`,
+    `https://find-a-friend-api-srvo.onrender.com/locations/states`,
   );
 
   return response.json();
