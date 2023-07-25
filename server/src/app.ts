@@ -24,9 +24,7 @@ app.register(fastifyJwt, {
   },
 });
 
-app.register(cors, {
-  origin: true,
-});
+app.register(cors);
 
 app.register(multer.contentParser);
 

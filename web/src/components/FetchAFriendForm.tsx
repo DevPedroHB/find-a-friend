@@ -1,7 +1,8 @@
 "use client";
 
 import { Select } from "@/components/Select";
-import { Cities, States, getCities } from "@/functions";
+import { TCity, TState } from "@/models/locations";
+import fetchCities from "@/services/fetch-cities";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,7 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 interface IFetchAFriendForm {
-  states: States[];
+  states: TState[];
 }
 
 const FetchAFriendFormSchema = z.object({
@@ -22,7 +23,7 @@ const FetchAFriendFormSchema = z.object({
 export type FetchAFriendFormData = z.infer<typeof FetchAFriendFormSchema>;
 
 export function FetchAFriendForm({ states }: IFetchAFriendForm) {
-  const [cities, setCities] = useState<Cities[]>([]);
+  const [cities, setCities] = useState<TCity[]>([]);
   const router = useRouter();
 
   const { handleSubmit, control, reset, watch, setValue } =
@@ -37,7 +38,7 @@ export function FetchAFriendForm({ states }: IFetchAFriendForm) {
   const uf_code = watch("uf_code");
 
   const handleGetCities = useCallback(async () => {
-    const { cities } = await getCities(uf_code);
+    const { cities } = await fetchCities(uf_code);
 
     setCities(cities);
   }, [uf_code]);

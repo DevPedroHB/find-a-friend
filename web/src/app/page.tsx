@@ -1,5 +1,5 @@
 import { FetchAFriendForm } from "@/components/FetchAFriendForm";
-import { getStates } from "@/functions";
+import { getStates } from "@/services/get-states";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";

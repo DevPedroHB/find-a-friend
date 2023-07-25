@@ -2,26 +2,33 @@
 
 import { Card } from "@/components/Card";
 import { Select } from "@/components/Select";
-import { Pet, getPets } from "@/functions";
+import { TPet } from "@/models/pets";
+import searchPets from "@/services/search-pets";
+import { Metadata } from "next";
+import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+export const metadata: Metadata = {
+  title: "FindAFriend | Pets",
+};
 
 interface IParams {
   city: string;
 }
 
 export default function Pets() {
-  const [pets, setPets] = useState<Pet[]>([]);
+  const [pets, setPets] = useState<TPet[]>([]);
   const params = useParams() as unknown as IParams;
 
-  async function handleGetPets() {
-    const { pets } = await getPets(params.city);
+  const handleSearchPets = useCallback(async () => {
+    const { pets } = await searchPets(params.city);
 
     setPets(pets);
-  }
+  }, []);
 
   useEffect(() => {
-    handleGetPets();
+    handleSearchPets();
   }, []);
 
   return (
@@ -46,7 +53,9 @@ export default function Pets() {
         </header>
         <main className="grid grid-cols-[repeat(auto-fill,minmax(17.5rem,1fr))] gap-8">
           {pets.map((pet) => (
-            <Card key={pet.id} pet={pet} />
+            <Link className="rounded-3xl" key={pet.id} href={`/pet/${pet.id}`}>
+              <Card pet={pet} />
+            </Link>
           ))}
         </main>
       </div>
